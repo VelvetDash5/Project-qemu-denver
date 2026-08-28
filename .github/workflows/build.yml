@@ -25,7 +25,7 @@ jobs:
             git wget curl libglib2.0-dev libfdt-dev libpixman-1-dev \
             zlib1g-dev ninja-build libsdl2-dev libepoxy-dev \
             xfslibs-dev libattr1-dev libcap-ng-dev libaio-dev \
-            rsync patch build-essential python3
+            rsync patch build-essential python3 libvirglrenderer-dev
 
       - name: Prepare QEMU Source & Apply Patches
         run: |
