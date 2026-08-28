@@ -41,8 +41,8 @@ jobs:
           # Adjust patch name/version according to the exact files present in your checkout
           rsync -r ../qemu-0/hw/3dfx ../qemu-1/hw/mesa ./hw/
           
-          if [ -f ../00-qemu92x-mesa-glide.patch ]; then
-            patch -p0 -i ../00-qemu82x-mesa-glide.patch
+          if [ -f ../01-qemu82x-mesa-glide.patch ]; then
+            patch -p0 -i ../01-qemu82x-mesa-glide.patch
           fi
 
           # Configure QEMU build
