@@ -31,7 +31,7 @@ jobs:
         run: |
           # Check the repository documentation for the target QEMU version 
           # (e.g., qemu-9.2.2 as an example referenced in the repo)
-          QEMU_VERSION="9.2.2"
+          QEMU_VERSION="8.2.2"
           
           wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz
           tar xf qemu-${QEMU_VERSION}.tar.xz
@@ -42,11 +42,8 @@ jobs:
           rsync -r ../qemu-0/hw/3dfx ../qemu-1/hw/mesa ./hw/
           
           if [ -f ../00-qemu92x-mesa-glide.patch ]; then
-            patch -p0 -i ../00-qemu92x-mesa-glide.patch
+            patch -p0 -i ../00-qemu82x-mesa-glide.patch
           fi
-
-          # Replace old sysbus.h header path with QEMU 9.x location
-          grep -rl 'hw/core/sysbus.h' hw/3dfx/ | xargs sed -i 's|hw/core/sysbus.h|hw/sysbus.h|g
 
           # Configure QEMU build
           mkdir build && cd build
