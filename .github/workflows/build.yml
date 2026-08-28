@@ -1,0 +1,60 @@
+name: Build QEMU-3dfx
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    name: Build on Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            git wget curl libglib2.0-dev libfdt-dev libpixman-1-dev \
+            zlib1g-dev ninja-build libsdl2-dev libepoxy-dev \
+            xfslibs-dev libattr1-dev libcap-ng-dev libaio-dev \
+            rsync patch build-essential python3
+
+      - name: Prepare QEMU Source & Apply Patches
+        run: |
+          # Check the repository documentation for the target QEMU version 
+          # (e.g., qemu-9.2.2 as an example referenced in the repo)
+          QEMU_VERSION="9.2.2"
+          
+          wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz
+          tar xf qemu-${QEMU_VERSION}.tar.xz
+          cd qemu-${QEMU_VERSION}
+          
+          # Overlay the 3dfx and mesa device models and apply the patch file
+          # Adjust patch name/version according to the exact files present in your checkout
+          rsync -r ../qemu-0/hw/3dfx ../qemu-1/hw/mesa ./hw/
+          
+          if [ -f ../00-qemu92x-mesa-glide.patch ]; then
+            patch -p0 -i ../00-qemu92x-mesa-glide.patch
+          fi
+
+          # Configure QEMU build
+          mkdir build && cd build
+          ../configure --prefix=/usr/local --enable-opengl --enable-sdl --enable-virglrenderer
+          
+          # Compile
+          make -j$(nproc)
+
+      - name: Archive Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: qemu-3dfx-ubuntu-binaries
+          path: |
+            qemu-*/build/qemu-system-*
