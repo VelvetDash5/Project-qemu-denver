@@ -31,7 +31,7 @@ jobs:
         run: |
           # Check the repository documentation for the target QEMU version 
           # (e.g., qemu-9.2.2 as an example referenced in the repo)
-          QEMU_VERSION="8.2.2"
+          QEMU_VERSION="9.2.2"
           
           wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz
           tar xf qemu-${QEMU_VERSION}.tar.xz
@@ -41,13 +41,18 @@ jobs:
           # Adjust patch name/version according to the exact files present in your checkout
           rsync -r ../qemu-0/hw/3dfx ../qemu-1/hw/mesa ./hw/
           
-          if [ -f ../01-qemu82x-mesa-glide.patch ]; then
-            patch -p0 -i ../01-qemu82x-mesa-glide.patch
+          # Copy target includes if provided by the repo layout
+          if [ -d "../qemu-0/include/hw/3dfx" ]; then
+            rsync -r ../qemu-0/include/hw/3dfx ./include/hw/
+          fi
+          
+          if [ -f ../00-qemu92x-mesa-glide.patch ]; then
+            patch -p0 -i ../00-qemu92x-mesa-glide.patch
           fi
 
           # Configure QEMU build
           mkdir build && cd build
-          ../configure --prefix=/usr/local --target-list=x86_64-softmmu,i386-softmmu --enable-opengl --enable-sdl --enable-virglrenderer
+          ../configure --prefix=/usr/local --target-list=x86_64-softmmu,i386-softmmu --enable-opengl --enable-sdl --enable-virglrenderer --extra-cflags="-I../include"
           
           # Compile
           make -j$(nproc)
