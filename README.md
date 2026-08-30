@@ -1,6 +1,11 @@
 # QEMU MESA GL/3Dfx Glide Pass-Through
 Copyright (C) 2018-2025<br>
 KJ Liew \<liewkj@yahoo.com\>
+## NOTICE
+kjliew has started harassing users after we opened the issue as occurred in certain conditions.
+We don't know what's been going on since I seen harassment in every issue.
+so we might advise to use PCem, PCbox or 86Box.
+This fork Project will be on Paused until new fork and updates arrive.
 ## Content
     qemu-0/hw/3dfx      - Overlay for QEMU source tree to add 3Dfx Glide pass-through device model
     qemu-1/hw/mesa      - Overlay for QEMU source tree to add MESA GL pass-through device model
