@@ -60,4 +60,4 @@ jobs:
           name: qemu-3dfx-ubuntu-binaries
           path: |
             qemu-*/build/qemu-system-*
-            qemu-*/build/pc-bios/
+            qemu-*/pc-bios/
