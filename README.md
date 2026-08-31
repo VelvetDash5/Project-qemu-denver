@@ -1,8 +1,6 @@
 # QEMU MESA GL/3Dfx Glide Pass-Through
 Copyright (C) 2018-2025<br>
 KJ Liew \<liewkj@yahoo.com\>
-## NOTICE
-kjliew has started harassing users after we opened the issue as occurred in certain conditions.
 We don't know what's been going on since I seen harassment in every issue.
 so we might advise to use PCem, PCbox or 86Box.
 This fork Project will be on Paused until new fork and updates arrive.
