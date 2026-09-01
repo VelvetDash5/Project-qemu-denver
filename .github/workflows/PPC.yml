@@ -45,7 +45,7 @@ jobs:
           patch -p1 ../qemu-virtio-gpu.patch
           ./configure \
             --target-list=ppc-softmmu \
-            --enable-audio-drv-list=pa,sdl \
+            --audio-drv-list=pa,sdl \
             --enable-sdl \
             --disable-werror
 
