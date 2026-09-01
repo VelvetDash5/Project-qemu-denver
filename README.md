@@ -3,7 +3,7 @@ Copyright (C) 2018-2025<br>
 KJ Liew \<liewkj@yahoo.com\>
 ## Notice
 This repository will be closed as it's binary blobs not GPL compliant.
-While Qemu is licensed under the GPL. You should compile this yourself by cloning it's main repository. 
+While Qemu is licensed under the GPL. You should patch this and compile this yourself by cloning it's main repository. 
 https://github.com/kjliew/qemu-3dfx
 ## Content
     qemu-0/hw/3dfx      - Overlay for QEMU source tree to add 3Dfx Glide pass-through device model
