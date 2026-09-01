@@ -42,7 +42,7 @@ jobs:
         if: matrix.target_os == 'linux'
         run: |
           cd qemu-screamer
-          git apply --3way ../qemu-virtio-gpu.patch
+          patch -p1 ../qemu-virtio-gpu.patch
           ./configure \
             --target-list=ppc-softmmu \
             --enable-audio-drv-list=pa,sdl \
